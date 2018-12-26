@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
+@RequestMapping("user")
 @RestController
+@CrossOrigin   //跨域请求
 public class UserController extends BaseController {
 
     @Autowired
