@@ -16,7 +16,7 @@ import java.util.Random;
 
 @RequestMapping("user")
 @RestController
-@CrossOrigin   //跨域请求
+@CrossOrigin(allowCredentials = "true",allowedHeaders = "*")   //跨域请求
 public class UserController extends BaseController {
 
     @Autowired
