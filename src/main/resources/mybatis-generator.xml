@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <!--  <classPathEntry location="" />
+-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+      <!--  <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>-->
+        <commentGenerator>
+            <!--  关闭自动生成的注释  -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--数据库链接地址和账号密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/miaosha?characterEncoding=utf-8"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <!--生产Model类存放的位置-->
+        <javaModelGenerator targetPackage="com.lixinxinlove.miaosha.dataobject" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--生产映射文件的位置-->
+        <sqlMapGenerator targetPackage="mapping"  targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+
+        <!--生产Dao文件的位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lixinxinlove.miaosha.dao"  targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+        <table  tableName="user_info" domainObjectName="UserDO"
+                enableCountByExample="false"
+                enableUpdateByExample="false"
+                enableDeleteByExample="false"
+                enableSelectByExample="false"
+                selectByExampleQueryId="false"></table>
+        <table  tableName="user_password" domainObjectName="UserPasswordDO"
+                enableCountByExample="false"
+                enableUpdateByExample="false"
+                enableDeleteByExample="false"
+                enableSelectByExample="false"
+                selectByExampleQueryId="false"></table>
+
+    </context>
+
+
+</generatorConfiguration>
