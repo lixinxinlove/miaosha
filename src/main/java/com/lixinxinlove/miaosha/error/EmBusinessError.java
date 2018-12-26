@@ -3,7 +3,9 @@ package com.lixinxinlove.miaosha.error;
 public enum EmBusinessError implements CommomError {
 
 
-    PARMETER_VALIDATION_ERROR(10001,"参数不合法"),
+    PARAMETER_VALIDATION_ERROR(10001, "参数不合法"),
+
+    UNKNOWN_ERROR(10002, "未知错误"),
 
     USER_NOT_EXIST(20001, "用户不存在");
 
