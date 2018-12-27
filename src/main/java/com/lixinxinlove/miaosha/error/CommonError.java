@@ -9,7 +9,7 @@ public interface CommonError {
 
     String getErrMsg();
 
-    CommonError setErrMsg(String errMsg);
+    void setErrMsg(String errMsg);
 
 
 }

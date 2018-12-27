@@ -53,11 +53,17 @@ public class UserServiceImpl implements UserService {
                 || userModel.getAge() == null
                 || StringUtils.isEmpty(userModel.getTelphone())
                 || StringUtils.isEmpty(userModel.getEncrptPassword())) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"手机号或密码错误");
         }
 
         UserDO userDO = convertFromModel(userModel);
-        userDOMapper.insertSelective(userDO);
+
+        try {
+            userDOMapper.insertSelective(userDO);
+        } catch (Exception ex) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "手机号已经注册过");
+        }
+
         userModel.setId(userDO.getId());
 
         UserPasswordDO userPasswordDO = convertPasswordFromModel(userModel);

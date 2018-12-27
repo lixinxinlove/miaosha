@@ -30,7 +30,6 @@ public class BaseController {
         } else {
             map.put("errCode", EmBusinessError.UNKNOWN_ERROR.getErrCode());
             map.put("errMsg", EmBusinessError.UNKNOWN_ERROR.getErrMsg());
-
         }
         return CommonReturnType.error(map);
     }

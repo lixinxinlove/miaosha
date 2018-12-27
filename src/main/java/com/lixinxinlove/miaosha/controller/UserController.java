@@ -41,7 +41,7 @@ public class UserController extends BaseController {
         System.out.println("inSessionOptCode" + inSessionOptCode);
 
         if (!inSessionOptCode.equals(optCode)) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码");
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码为空");
         }
 
         System.out.println("短信验证码通过");

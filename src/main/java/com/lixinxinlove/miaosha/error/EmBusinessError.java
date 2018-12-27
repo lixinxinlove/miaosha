@@ -31,7 +31,7 @@ public enum EmBusinessError implements CommonError {
     }
 
     @Override
-    public CommonError setErrMsg(String errMsg) {
-        return null;
+    public void setErrMsg(String errMsg) {
+        this.errMsg=errMsg;
     }
 }

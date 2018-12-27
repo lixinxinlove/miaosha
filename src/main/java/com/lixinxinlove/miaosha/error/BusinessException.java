@@ -21,16 +21,16 @@ public class BusinessException extends Exception implements CommonError {
 
     @Override
     public int getErrCode() {
-        return commonError.getErrCode();
+        return this.commonError.getErrCode();
     }
 
     @Override
     public String getErrMsg() {
-        return commonError.getErrMsg();
+        return this.commonError.getErrMsg();
     }
 
     @Override
-    public CommonError setErrMsg(String errMsg) {
-        return commonError.setErrMsg(errMsg);
+    public void setErrMsg(String errMsg) {
+         this.commonError.setErrMsg(errMsg);
     }
 }
