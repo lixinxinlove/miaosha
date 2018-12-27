@@ -24,7 +24,7 @@
     select
     <include refid="Base_Column_List" />
     from user_info
-    where telphone = #{telphone,jdbcType=VARCHAR}
+    where telphone = #{telphone,jdbcType=INTEGER}
   </select>
 
 
@@ -33,11 +33,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lixinxinlove.miaosha.dataobject.UserDO">
-    insert into user_info (id, name, gender, 
-      age, telphone, register_mode, 
+    insert into user_info (id, name, gender,
+      age, telphone, register_mode,
       third_party_id)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT}, 
-      #{age,jdbcType=INTEGER}, #{telphone,jdbcType=VARCHAR}, #{registerMode,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=TINYINT},
+      #{age,jdbcType=INTEGER}, #{telphone,jdbcType=VARCHAR}, #{registerMode,jdbcType=VARCHAR},
       #{thirdPartyId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lixinxinlove.miaosha.dataobject.UserDO" keyProperty="id" useGeneratedKeys="true">
