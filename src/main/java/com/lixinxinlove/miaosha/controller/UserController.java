@@ -37,9 +37,14 @@ public class UserController extends BaseController {
 
 
         String inSessionOptCode = (String) this.httpServletRequest.getSession().getAttribute(telphone);
+
+        System.out.println("inSessionOptCode" + inSessionOptCode);
+
         if (!inSessionOptCode.equals(optCode)) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码");
         }
+
+        System.out.println("短信验证码通过");
 
         //注册
         UserModel userModel = new UserModel();
@@ -50,6 +55,7 @@ public class UserController extends BaseController {
         userModel.setEncrptPassword(password);
         userModel.setRegisterMode("手机");
         userService.register(userModel);
+
         return CommonReturnType.create(null);
     }
 
