@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
                 || userModel.getAge() == null
                 || StringUtils.isEmpty(userModel.getTelphone())
                 || StringUtils.isEmpty(userModel.getEncrptPassword())) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"手机号或密码错误");
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "手机号或密码错误");
         }
 
         UserDO userDO = convertFromModel(userModel);
@@ -68,6 +68,34 @@ public class UserServiceImpl implements UserService {
 
         UserPasswordDO userPasswordDO = convertPasswordFromModel(userModel);
         userPasswordDOMapper.insertSelective(userPasswordDO);
+    }
+
+
+    /*登录*/
+    @Override
+    public UserModel validateLogin(String telphone, String password) throws BusinessException {
+
+        //通过手机号查用户
+
+        UserDO userDO = userDOMapper.selectByTelphone(telphone);
+        if (userDO == null) {
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+
+        UserPasswordDO userPasswordDO = userPasswordDOMapper.selectByUserId(userDO.getId());
+        if (userPasswordDO == null) {
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+
+
+        UserModel userModel = convertFromDataObject(userDO, userPasswordDO);
+
+        if (!userModel.getEncrptPassword().equals(password)) {
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+
+        return userModel;
+
     }
 
     private UserDO convertFromModel(UserModel userModel) {

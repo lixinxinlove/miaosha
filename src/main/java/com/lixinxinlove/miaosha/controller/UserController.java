@@ -7,11 +7,13 @@ import com.lixinxinlove.miaosha.error.EmBusinessError;
 import com.lixinxinlove.miaosha.response.CommonReturnType;
 import com.lixinxinlove.miaosha.service.UserService;
 import com.lixinxinlove.miaosha.service.model.UserModel;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Random;
 
 @RequestMapping("user")
@@ -24,6 +26,23 @@ public class UserController extends BaseController {
 
     @Autowired
     private HttpServletRequest httpServletRequest;
+
+
+    @RequestMapping(value = "/login", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
+    public CommonReturnType login(@RequestParam(name = "telphone") String telphone, @RequestParam(name = "password") String password) throws BusinessException {
+
+        if (StringUtils.isEmpty(telphone) || StringUtils.isEmpty(password)) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+
+        UserModel userModel = userService.validateLogin(telphone, password);
+
+        //保存用户登录状态
+        this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
+        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
+        System.out.println("--------------------登录成功------------------");
+        return CommonReturnType.create(null);
+    }
 
 
     /*注册*/
@@ -43,8 +62,6 @@ public class UserController extends BaseController {
         if (!inSessionOptCode.equals(optCode)) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码为空");
         }
-
-        System.out.println("短信验证码通过");
 
         //注册
         UserModel userModel = new UserModel();
