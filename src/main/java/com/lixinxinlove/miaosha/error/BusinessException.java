@@ -3,34 +3,34 @@ package com.lixinxinlove.miaosha.error;
 /**
  * 统一异常处理  包装器 业务异常类实现
  */
-public class BusinessException extends Exception implements CommomError {
+public class BusinessException extends Exception implements CommonError {
 
-    private CommomError commomError;
+    private CommonError commonError;
 
-    public BusinessException(CommomError commomError) {
+    public BusinessException(CommonError commonError) {
         super();
-        this.commomError = commomError;
+        this.commonError = commonError;
     }
 
-    public BusinessException(CommomError commomError, String errMsg) {
+    public BusinessException(CommonError commonError, String errMsg) {
         super();
-        this.commomError = commomError;
-        this.commomError.setErrMsg(errMsg);
+        this.commonError = commonError;
+        this.commonError.setErrMsg(errMsg);
     }
 
 
     @Override
     public int getErrCode() {
-        return commomError.getErrCode();
+        return commonError.getErrCode();
     }
 
     @Override
     public String getErrMsg() {
-        return commomError.getErrMsg();
+        return commonError.getErrMsg();
     }
 
     @Override
-    public CommomError setErrMsg(String errMsg) {
-        return commomError.setErrMsg(errMsg);
+    public CommonError setErrMsg(String errMsg) {
+        return commonError.setErrMsg(errMsg);
     }
 }

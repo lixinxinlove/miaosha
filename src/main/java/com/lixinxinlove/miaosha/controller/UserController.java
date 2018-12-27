@@ -16,7 +16,7 @@ import java.util.Random;
 
 @RequestMapping("user")
 @RestController
-@CrossOrigin(allowCredentials = "true",allowedHeaders = "*")   //跨域请求
+@CrossOrigin(allowCredentials = "true", allowedHeaders = "*")   //跨域请求
 public class UserController extends BaseController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class UserController extends BaseController {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
-    @GetMapping("/getotp")
+    @RequestMapping(value = "/getotp", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
     public CommonReturnType getOtp(@RequestParam(name = "telphone") String telphone) {
         Random random = new Random();
         int randomInt = random.nextInt(99999);
@@ -34,7 +34,8 @@ public class UserController extends BaseController {
         //关联用户的手机号和验证码
         httpServletRequest.getSession().setAttribute(telphone, otpCode);
         //发送短信给用户
-        System.out.println("opt=======" + otpCode);
+        System.out.println("telphone=" + telphone + "-------opt=" + otpCode);
+
         return CommonReturnType.create(null);
     }
 

@@ -14,7 +14,7 @@ public class CommonReturnType {
     public static CommonReturnType create(Object data) {
         commonReturnType = new CommonReturnType();
         commonReturnType.setData(data);
-        commonReturnType.setStatus("scc");
+        commonReturnType.setStatus("success");
         commonReturnType.setCode(1000);
         return commonReturnType;
     }
@@ -22,11 +22,10 @@ public class CommonReturnType {
     public static CommonReturnType error(Object data) {
         commonReturnType = new CommonReturnType();
         commonReturnType.setData(data);
-        commonReturnType.setStatus("fal");
+        commonReturnType.setStatus("fail");
         commonReturnType.setCode(4000);
         return commonReturnType;
     }
-
 
     public String getStatus() {
         return status;

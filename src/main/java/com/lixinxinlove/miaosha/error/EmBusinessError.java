@@ -1,6 +1,6 @@
 package com.lixinxinlove.miaosha.error;
 
-public enum EmBusinessError implements CommomError {
+public enum EmBusinessError implements CommonError {
 
 
     PARAMETER_VALIDATION_ERROR(10001, "参数不合法"),
@@ -31,7 +31,7 @@ public enum EmBusinessError implements CommomError {
     }
 
     @Override
-    public CommomError setErrMsg(String errMsg) {
+    public CommonError setErrMsg(String errMsg) {
         return null;
     }
 }

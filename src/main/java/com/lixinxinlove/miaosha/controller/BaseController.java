@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class BaseController {
 
+    public static final String CONTENT_TYPE_FORMED = "application/x-www-form-urlencoded";
+
 
     //解决Controller 没有处理的异常
     @ExceptionHandler(Exception.class)
