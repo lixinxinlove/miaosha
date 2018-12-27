@@ -8,6 +8,8 @@ import com.lixinxinlove.miaosha.error.BusinessException;
 import com.lixinxinlove.miaosha.error.EmBusinessError;
 import com.lixinxinlove.miaosha.service.UserService;
 import com.lixinxinlove.miaosha.service.model.UserModel;
+import com.lixinxinlove.miaosha.validator.ValidatorImpl;
+import com.lixinxinlove.miaosha.validator.ValidatorResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserPasswordDOMapper userPasswordDOMapper;
 
+    @Autowired
+    private ValidatorImpl validator;
+
     @Override
     public UserModel getUserById(Integer id) {
         UserDO userDO = userDOMapper.selectByPrimaryKey(id);
@@ -48,13 +53,25 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
 
-        if (StringUtils.isEmpty(userModel.getName())
-                || userModel.getGender() == null
-                || userModel.getAge() == null
-                || StringUtils.isEmpty(userModel.getTelphone())
-                || StringUtils.isEmpty(userModel.getEncrptPassword())) {
-            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "手机号或密码错误");
+//        if (StringUtils.isEmpty(userModel.getName())
+//                || userModel.getGender() == null
+//                || userModel.getAge() == null
+//                || StringUtils.isEmpty(userModel.getTelphone())
+//                || StringUtils.isEmpty(userModel.getEncrptPassword())) {
+//            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "手机号或密码错误");
+//        }
+
+        System.out.println("ValidatorResult之前");
+
+
+        ValidatorResult result = validator.validate(userModel);
+        if (result.isHasErrors()) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, result.getErrMsg());
         }
+
+
+        System.out.println("ValidatorResult之后");
+
 
         UserDO userDO = convertFromModel(userModel);
 
