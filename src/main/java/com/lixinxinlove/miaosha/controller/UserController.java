@@ -25,6 +25,35 @@ public class UserController extends BaseController {
     @Autowired
     private HttpServletRequest httpServletRequest;
 
+
+    /*注册*/
+    @RequestMapping(value = "/register", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
+    public CommonReturnType register(@RequestParam(name = "optCode") String optCode,
+                                     @RequestParam(name = "name") String name,
+                                     @RequestParam(name = "gender") String gender,
+                                     @RequestParam(name = "age") Integer age,
+                                     @RequestParam(name = "telphone") String telphone,
+                                     @RequestParam(name = "password") String password) throws BusinessException {
+
+
+        String inSessionOptCode = (String) this.httpServletRequest.getSession().getAttribute(telphone);
+        if (!inSessionOptCode.equals(optCode)) {
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码");
+        }
+
+        //注册
+        UserModel userModel = new UserModel();
+        userModel.setName(name);
+        userModel.setAge(age);
+        userModel.setGender(Byte.valueOf(gender));
+        userModel.setTelphone(telphone);
+        userModel.setEncrptPassword(password);
+        userModel.setRegisterMode("手机");
+        userService.register(userModel);
+        return CommonReturnType.create(null);
+    }
+
+
     @RequestMapping(value = "/getotp", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
     public CommonReturnType getOtp(@RequestParam(name = "telphone") String telphone) {
         Random random = new Random();
@@ -35,7 +64,6 @@ public class UserController extends BaseController {
         httpServletRequest.getSession().setAttribute(telphone, otpCode);
         //发送短信给用户
         System.out.println("telphone=" + telphone + "-------opt=" + otpCode);
-
         return CommonReturnType.create(null);
     }
 
