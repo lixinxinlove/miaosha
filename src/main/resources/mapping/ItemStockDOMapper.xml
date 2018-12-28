@@ -21,7 +21,7 @@
     select
     <include refid="Base_Column_List" />
     from item_stock
-    where ttem_id = #{itemId,jdbcType=INTEGER}
+    where item_id = #{itemId,jdbcType=INTEGER}
   </select>
 
 
