@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 商品
@@ -57,6 +59,14 @@ public class ItemController extends BaseController {
         ItemModel itemModel = itemService.getItemById(id);
         ItemVO itemVO = convertVOFromMode(itemModel);
         return CommonReturnType.create(itemVO);
+    }
+
+
+    @RequestMapping(value = "/list", method = {RequestMethod.GET})
+    public CommonReturnType getList() {
+        List<ItemModel> itemModelList = itemService.listItem();
+        List<ItemVO> itemVOList = itemModelList.stream().map(itemModel -> convertVOFromMode(itemModel)).collect(Collectors.toList());
+        return CommonReturnType.create(itemVOList);
     }
 
 
