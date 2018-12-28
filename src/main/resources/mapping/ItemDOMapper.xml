@@ -6,11 +6,11 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="seles" jdbcType="INTEGER" property="seles" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
     <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, price, description, seles, img_url
+    id, title, price, description, sales, img_url
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,10 +24,10 @@
   </delete>
   <insert id="insert" parameterType="com.lixinxinlove.miaosha.dataobject.ItemDO"  keyProperty="id" useGeneratedKeys="true">
     insert into item (id, title, price,
-      description, seles, img_url
+      description, sales, img_url
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE},
-      #{description,jdbcType=VARCHAR}, #{seles,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}
+      #{description,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lixinxinlove.miaosha.dataobject.ItemDO"  keyProperty="id" useGeneratedKeys="true">
@@ -45,8 +45,8 @@
       <if test="description != null">
         description,
       </if>
-      <if test="seles != null">
-        seles,
+      <if test="sales != null">
+        sales,
       </if>
       <if test="imgUrl != null">
         img_url,
@@ -65,8 +65,8 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="seles != null">
-        #{seles,jdbcType=INTEGER},
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
       </if>
       <if test="imgUrl != null">
         #{imgUrl,jdbcType=VARCHAR},
@@ -85,8 +85,8 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="seles != null">
-        seles = #{seles,jdbcType=INTEGER},
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
       </if>
       <if test="imgUrl != null">
         img_url = #{imgUrl,jdbcType=VARCHAR},
@@ -99,7 +99,7 @@
     set title = #{title,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
       description = #{description,jdbcType=VARCHAR},
-      seles = #{seles,jdbcType=INTEGER},
+      sales = #{sales,jdbcType=INTEGER},
       img_url = #{imgUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

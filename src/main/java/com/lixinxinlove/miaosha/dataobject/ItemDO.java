@@ -9,7 +9,7 @@ public class ItemDO {
 
     private String description;
 
-    private Integer seles;
+    private Integer sales;
 
     private String imgUrl;
 
@@ -45,12 +45,12 @@ public class ItemDO {
         this.description = description == null ? null : description.trim();
     }
 
-    public Integer getSeles() {
-        return seles;
+    public Integer getSales() {
+        return sales;
     }
 
-    public void setSeles(Integer seles) {
-        this.seles = seles;
+    public void setSales(Integer sales) {
+        this.sales = sales;
     }
 
     public String getImgUrl() {

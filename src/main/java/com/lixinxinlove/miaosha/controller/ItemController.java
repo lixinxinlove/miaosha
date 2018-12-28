@@ -24,7 +24,7 @@ public class ItemController extends BaseController {
     @Autowired
     private ItemService itemService;
 
-    @RequestMapping(value = "/create", method = {RequestMethod.POST},consumes = CONTENT_TYPE_FORMED)
+    @RequestMapping(value = "/create", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
     public CommonReturnType createItem(@RequestParam(name = "title") String title,
                                        @RequestParam(name = "description") String description,
                                        @RequestParam(name = "price") BigDecimal price,
@@ -42,6 +42,20 @@ public class ItemController extends BaseController {
 
         ItemVO itemVO = convertVOFromMode(itemModel1ForReturn);
 
+        return CommonReturnType.create(itemVO);
+    }
+
+
+    /**
+     * 获取单条商品
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/get", method = {RequestMethod.GET})
+    public CommonReturnType getItem(@RequestParam(name = "id") Integer id) {
+        ItemModel itemModel = itemService.getItemById(id);
+        ItemVO itemVO = convertVOFromMode(itemModel);
         return CommonReturnType.create(itemVO);
     }
 
