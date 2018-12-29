@@ -90,6 +90,23 @@ public class ItemServiceImpl implements ItemService {
         return itemModel;
     }
 
+    /**
+     * 减库存
+     *
+     * @param itemId
+     * @param amount
+     * @return
+     */
+    @Override
+    public boolean decreaseStock(Integer itemId, Integer amount) {
+        int i = itemStockDOMapper.decreaseStock(itemId, amount);
+        if (i > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private ItemModel convertModelFromDataObject(ItemDO itemDO, ItemStockDO itemStockDO) {
         ItemModel itemModel = new ItemModel();
         BeanUtils.copyProperties(itemDO, itemModel);

@@ -16,4 +16,13 @@ public interface ItemStockDOMapper {
     int updateByPrimaryKeySelective(ItemStockDO record);
 
     int updateByPrimaryKey(ItemStockDO record);
+
+    /**
+     * 减去库充
+     *
+     * @param itemId
+     * @param amount
+     * @return
+     */
+    int decreaseStock(Integer itemId, Integer amount);
 }
