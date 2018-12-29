@@ -73,14 +73,13 @@ public class OrderServiceImpl implements OrderService {
         orderModel.setAmount(amount);
         orderModel.setItemPrice(itemModel.getPrice());
         orderModel.setOrderPrice(itemModel.getPrice().multiply(new BigDecimal(amount)));
-
+        orderModel.setId(generateOrderNo());
 
         OrderDO orderDO = convertFromOrderModer(orderModel);
-        orderDO.setId(generateOrderNo());
 
         orderDOMapper.insertSelective(orderDO);
 
-        return null;
+        return orderModel;
     }
 
 
