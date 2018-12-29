@@ -1,8 +1,9 @@
 package com.lixinxinlove.miaosha.controller.viewobject;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ItemVO {
+public class ItemVO implements Serializable {
 
     private Integer id;
     private String title;

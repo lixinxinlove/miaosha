@@ -64,6 +64,7 @@ public class ItemController extends BaseController {
 
     /**
      * 商品列表
+     *
      * @return
      */
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
