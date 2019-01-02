@@ -37,6 +37,9 @@ public class ItemModel {
     @NotNull(message = "商品图片不能为空")
     private String imgUrl;
 
+    //使用聚合模型，如果promoModel 不为空，表示有还未结束的秒杀活动
+    private PromoModel promoModel;
+
     public Integer getId() {
         return id;
     }
@@ -104,5 +107,13 @@ public class ItemModel {
                 ", sales=" + sales +
                 ", imgUrl='" + imgUrl + '\'' +
                 '}';
+    }
+
+    public PromoModel getPromoModel() {
+        return promoModel;
+    }
+
+    public void setPromoModel(PromoModel promoModel) {
+        this.promoModel = promoModel;
     }
 }
