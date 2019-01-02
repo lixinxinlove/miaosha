@@ -23,3 +23,4 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/miaosha/src/main/resources/miaosha/static
