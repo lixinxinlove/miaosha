@@ -71,30 +71,30 @@
 				var password=$("#password").val();
 
 
-				// if (telphone==null || telphone=="") {
-				// 	alert("手机号不能为空");
-				// 	return false;
-				// }
-				// if (optCode==null || optCode=="") {
-				// 	alert("验证码不能为空");
-				// 	return false;
-				// }
-				// if (name==null || name=="") {
-				// 	alert("用户名不能");
-				// 	return false;
-				// }
-				// if (age==null || age=="") {
-				// 	alert("年龄不能为空");
-				// 	return false;
-				// }
-				// if (gender==null || gender=="") {
-				// 	alert("性别不能为空");
-				// 	return false;
-				// }
-				// if (password==null || password=="") {
-				// 	alert("密码不能为空");
-				// 	return false;
-				// }
+				if (telphone==null || telphone=="") {
+					alert("手机号不能为空");
+					return false;
+				}
+				if (optCode==null || optCode=="") {
+					alert("验证码不能为空");
+					return false;
+				}
+				if (name==null || name=="") {
+					alert("用户名不能");
+					return false;
+				}
+				if (age==null || age=="") {
+					alert("年龄不能为空");
+					return false;
+				}
+				if (gender==null || gender=="") {
+					alert("性别不能为空");
+					return false;
+				}
+				if (password==null || password=="") {
+					alert("密码不能为空");
+					return false;
+				}
 
 				$.ajax({
 					type:"POST",

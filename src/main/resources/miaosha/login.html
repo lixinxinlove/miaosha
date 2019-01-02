@@ -68,6 +68,7 @@
 					success:function(data){
 						if (data.status=="success") {
 							alert("登录成功");
+							window.location.href="itemlist.html";
 						}
 						else{
 							alert("登录失败"+data.data.errMsg);
