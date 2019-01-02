@@ -52,6 +52,7 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "商品不存在");
         }
 
+
         UserModel userModel = userService.getUserById(userId);
 
         if (userModel == null) {
@@ -61,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
         if (amount <= 0 || amount > 99) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "库存不足");
         }
-
+        System.out.println("校验活动信息前");
 
         //校验活动信息
         if (promoId != null) {
@@ -71,9 +72,8 @@ public class OrderServiceImpl implements OrderService {
 
                 //校验秒杀活动是否进行中
             }else if (itemModel.getPromoModel().getStatus()!=2){
-
+                System.out.println("校验活动信息后");
                 throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "秒杀活动没开始");
-
             }
         }
 
@@ -83,6 +83,9 @@ public class OrderServiceImpl implements OrderService {
         if (!r) {
             throw new BusinessException(EmBusinessError.STOCK_NOT_BNOUGH);
         }
+
+
+        System.out.println("订单入库前");
         //3 订单入库
         OrderModel orderModel = new OrderModel();
         orderModel.setUserId(userId);
@@ -92,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
             orderModel.setItemPrice(itemModel.getPromoModel().getPromoItemPrice());
             orderModel.setOrderPrice(itemModel.getPromoModel().getPromoItemPrice().multiply(new BigDecimal(amount)));
         }else {
+            System.out.println("没有秒杀活动");
             orderModel.setItemPrice(itemModel.getPrice());
             orderModel.setOrderPrice(itemModel.getPrice().multiply(new BigDecimal(amount)));
         }

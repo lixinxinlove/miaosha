@@ -116,6 +116,7 @@ function getParam(paramName) {
 			data:{
 				"itemId":getParam("id"),
 				"amount":1,
+				"promoId":g_item.promoId,
 			},
 			success:function(data){
 				if (data.status=="success") {
@@ -123,7 +124,7 @@ function getParam(paramName) {
        	           window.location.reload();
 				}
 				else{
-					alert("下单失败");
+					alert("下单失败"+data.data.errMsg);
 				}
 			},
 
