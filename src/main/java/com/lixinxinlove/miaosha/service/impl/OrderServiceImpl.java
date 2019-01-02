@@ -47,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
         //1.参数
 
         ItemModel itemModel = itemService.getItemById(itemId);
+        System.out.println(itemModel.toString());
         if (itemModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "商品不存在");
         }
@@ -78,10 +79,13 @@ public class OrderServiceImpl implements OrderService {
         OrderDO orderDO = convertFromOrderModer(orderModel);
 
         orderDOMapper.insertSelective(orderDO);
+        System.out.println("订单入库");
+        //4.增加商品销量
+        itemService.increaseSales(itemId, amount);
+        System.out.println("增加商品销量");
 
         return orderModel;
     }
-
 
     //生成订单号
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -119,6 +123,9 @@ public class OrderServiceImpl implements OrderService {
 
         OrderDO orderDO = new OrderDO();
         BeanUtils.copyProperties(orderModel, orderDO);
+        orderDO.setItemPrice(orderModel.getItemPrice().doubleValue());
+        orderDO.setOrderPrice(orderModel.getOrderPrice().doubleValue());
+
         return orderDO;
     }
 

@@ -23,4 +23,6 @@ public interface ItemService {
     boolean decreaseStock(Integer itemId, Integer amount);
 
 
+    //商品销量增加
+    void increaseSales(Integer itemId,Integer amount) throws BusinessException;
 }

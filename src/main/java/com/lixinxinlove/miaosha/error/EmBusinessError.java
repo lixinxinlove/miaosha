@@ -11,6 +11,8 @@ public enum EmBusinessError implements CommonError {
 
     USER_LOGIN_FAIL(20002, "用户手机号或密码不正确"),
 
+    USER_NOT_LOGIN(20003, "用户没有登录"),
+
 
     STOCK_NOT_BNOUGH(300000, "库存不足");
 
