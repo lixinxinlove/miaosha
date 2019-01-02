@@ -13,6 +13,9 @@ public class OrderDO {
 
     private Double orderPrice;
 
+    //秒杀商品id
+    private Integer promoId;
+
     public String getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class OrderDO {
 
     public void setOrderPrice(Double orderPrice) {
         this.orderPrice = orderPrice;
+    }
+
+    public Integer getPromoId() {
+        return promoId;
+    }
+
+    public void setPromoId(Integer promoId) {
+        this.promoId = promoId;
     }
 }

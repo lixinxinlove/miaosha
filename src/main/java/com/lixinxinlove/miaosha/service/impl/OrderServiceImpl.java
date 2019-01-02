@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderModel createOrder(Integer userId, Integer itemId, Integer amount) throws BusinessException {
+    public OrderModel createOrder(Integer userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException {
 
         //1.参数
 
@@ -61,6 +61,22 @@ public class OrderServiceImpl implements OrderService {
         if (amount <= 0 || amount > 99) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "库存不足");
         }
+
+
+        //校验活动信息
+        if (promoId != null) {
+            //校验商品是否有秒杀活动
+            if (promoId.intValue() != itemModel.getPromoModel().getId()) {
+                throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "活动信息不正确");
+
+                //校验秒杀活动是否进行中
+            }else if (itemModel.getPromoModel().getStatus()!=2){
+
+                throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "秒杀活动没开始");
+
+            }
+        }
+
         //2.锁库存
 
         boolean r = itemService.decreaseStock(itemId, amount);
@@ -72,9 +88,16 @@ public class OrderServiceImpl implements OrderService {
         orderModel.setUserId(userId);
         orderModel.setItemId(itemId);
         orderModel.setAmount(amount);
-        orderModel.setItemPrice(itemModel.getPrice());
-        orderModel.setOrderPrice(itemModel.getPrice().multiply(new BigDecimal(amount)));
+        if (promoId!=null){
+            orderModel.setItemPrice(itemModel.getPromoModel().getPromoItemPrice());
+            orderModel.setOrderPrice(itemModel.getPromoModel().getPromoItemPrice().multiply(new BigDecimal(amount)));
+        }else {
+            orderModel.setItemPrice(itemModel.getPrice());
+            orderModel.setOrderPrice(itemModel.getPrice().multiply(new BigDecimal(amount)));
+        }
+
         orderModel.setId(generateOrderNo());
+        orderModel.setPromoId(promoId);
 
         OrderDO orderDO = convertFromOrderModer(orderModel);
 
