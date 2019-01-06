@@ -41,7 +41,7 @@ public class UserController extends BaseController {
         this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
         System.out.println("--------------------登录成功------------------");
-        return CommonReturnType.create(null);
+        return CommonReturnType.create(convertFromModel(userModel));
     }
 
 
