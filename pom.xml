@@ -85,7 +85,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.lixinxinlove.miaosha.MiaoshaApplication</mainClass>
+                </configuration>
             </plugin>
+
 
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
