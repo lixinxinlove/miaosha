@@ -11,6 +11,7 @@
     <groupId>com.lixinxinlove</groupId>
     <artifactId>miaosha</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>miaosha</name>
     <description>Demo project for Spring Boot</description>
 
@@ -99,7 +100,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.41</version>
+                        <version>8.0.13</version>
                     </dependency>
                 </dependencies>
                 <executions>
