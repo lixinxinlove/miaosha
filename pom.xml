@@ -36,6 +36,23 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <!--排除默认的lettuce连接驱动-->
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>lettuce-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!--引入Redis连接驱动-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
 
         <!--mysql-->
         <dependency>
@@ -64,7 +81,7 @@
         </dependency>
 
 
-        <dependency >
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.2.4.Final</version>
@@ -122,9 +139,7 @@
                     <verbose>true</verbose>
                     <!--容许自动覆盖文件-->
                     <overwrite>false</overwrite>
-                    <configurationFile>
-                        src/main/resources/mybatis-generator.xml
-                    </configurationFile>
+                    <configurationFile>src/main/resources/mybatis-generator.xml</configurationFile>
 
                 </configuration>
             </plugin>
