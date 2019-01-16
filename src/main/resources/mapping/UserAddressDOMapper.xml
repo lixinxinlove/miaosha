@@ -25,6 +25,16 @@
     from user_address
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+
+  <select id="selectByUserId"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_address
+    where id = #{userId,jdbcType=INTEGER}
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_address
     where id = #{id,jdbcType=INTEGER}
