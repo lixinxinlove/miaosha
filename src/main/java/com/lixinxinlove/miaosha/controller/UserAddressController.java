@@ -25,7 +25,6 @@ public class UserAddressController extends BaseController {
     @RequestMapping(value = "/add", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
     public CommonReturnType add(UserAddressVO userAddressVO) throws BusinessException {
 
-
         UserAddressDO userAddressDO = new UserAddressDO();
         BeanUtils.copyProperties(userAddressVO, userAddressDO);
         Integer i = userAddressService.addUserAddress(userAddressDO);

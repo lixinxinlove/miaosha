@@ -17,7 +17,7 @@ public class UserAddressServiceImpl implements UserAddressService {
 
     @Override
     public Integer addUserAddress(UserAddressDO userAddressDO) {
-        return userAddressDOMapper.insertSelective(userAddressDO);
+        return userAddressDOMapper.insert(userAddressDO);
     }
 
     @Override
