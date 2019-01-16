@@ -31,7 +31,9 @@ public class OrderController extends BaseController {
     private HttpServletRequest httpServletRequest;
 
     @RequestMapping(value = "/createorder", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
-    public CommonReturnType createOrder(@RequestParam(name = "itemId") Integer itemId, @RequestParam(name = "promoId", required = false) Integer promoId, @RequestParam(name = "amount") Integer amount)
+    public CommonReturnType createOrder(@RequestParam(name = "itemId") Integer itemId,
+                                        @RequestParam(name = "promoId", required = false) Integer promoId,
+                                        @RequestParam(name = "amount") Integer amount)
             throws BusinessException {
 
         //

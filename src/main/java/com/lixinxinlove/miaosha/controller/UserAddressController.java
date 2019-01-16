@@ -39,15 +39,18 @@ public class UserAddressController extends BaseController {
 
     @RequestMapping(value = "/list", method = {RequestMethod.GET})
     public CommonReturnType list(@RequestParam(name = "userId") Integer userId) throws BusinessException {
-
         List<UserAddressDO> list = userAddressService.getUserAddressList(userId);
 
-        //List<UserAddressDO> list = new ArrayList<>();
-       // UserAddressDO userAddressDO = new UserAddressDO();
-       // userAddressDO.setReceiverName("李欣欣");
-       // list.add(userAddressDO);
-        if (list != null) {
-            return CommonReturnType.create(list);
+
+        List<UserAddressVO> list1 = new ArrayList<>();
+        for (UserAddressDO userAddressDO : list) {
+            UserAddressVO userAddressVO = new UserAddressVO();
+            BeanUtils.copyProperties(userAddressDO, userAddressVO);
+            list1.add(userAddressVO);
+        }
+
+        if (list1 != null) {
+            return CommonReturnType.create(list1);
         } else {
             return CommonReturnType.create(null);
         }
