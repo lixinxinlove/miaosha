@@ -21,6 +21,12 @@ public class UserAddressServiceImpl implements UserAddressService {
     }
 
     @Override
+    public Integer updateAddress(UserAddressDO userAddressDO) {
+        Integer i = userAddressDOMapper.updateByPrimaryKeySelective(userAddressDO);
+        return i;
+    }
+
+    @Override
     public List<UserAddressDO> getUserAddressList(Integer userId) {
         return userAddressDOMapper.selectByUserId(userId);
     }

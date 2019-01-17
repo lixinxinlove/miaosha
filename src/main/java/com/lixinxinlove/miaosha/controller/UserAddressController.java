@@ -8,6 +8,7 @@ import com.lixinxinlove.miaosha.response.CommonReturnType;
 import com.lixinxinlove.miaosha.service.UserAddressService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,14 +23,14 @@ public class UserAddressController extends BaseController {
     private UserAddressService userAddressService;
 
 
-    @RequestMapping(value = "/add", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
-    public CommonReturnType add(UserAddressVO userAddressVO) throws BusinessException {
+    @RequestMapping(value = "/add", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED, MediaType.APPLICATION_JSON_VALUE})
+    public CommonReturnType add(@RequestBody UserAddressVO userAddressVO) throws BusinessException {
 
         UserAddressDO userAddressDO = new UserAddressDO();
         BeanUtils.copyProperties(userAddressVO, userAddressDO);
         Integer i = userAddressService.addUserAddress(userAddressDO);
         if (i != null && i > 0) {
-            return CommonReturnType.create(null);
+            return CommonReturnType.create(i);
         } else {
             return CommonReturnType.error(null);
         }
@@ -54,5 +55,27 @@ public class UserAddressController extends BaseController {
             return CommonReturnType.create(null);
         }
     }
+
+
+    @RequestMapping(value = "/update", method = {RequestMethod.POST}, consumes = CONTENT_TYPE_FORMED)
+    public CommonReturnType updateAddress(UserAddressVO userAddressVO) {
+
+        UserAddressDO userAddressDO = getUserAddressDO2userAddressVO(userAddressVO);
+
+        Integer i = userAddressService.updateAddress(userAddressDO);
+        if (i != null && i > 0) {
+            return CommonReturnType.create(null);
+        } else {
+            return CommonReturnType.error(null);
+        }
+    }
+
+
+    private UserAddressDO getUserAddressDO2userAddressVO(UserAddressVO userAddressVO) {
+        UserAddressDO userAddressDO = new UserAddressDO();
+        BeanUtils.copyProperties(userAddressVO, userAddressDO);
+        return userAddressDO;
+    }
+
 
 }

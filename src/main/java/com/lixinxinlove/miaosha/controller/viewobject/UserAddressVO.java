@@ -102,4 +102,19 @@ public class UserAddressVO {
         this.receiverZip = receiverZip == null ? null : receiverZip.trim();
     }
 
+    @Override
+    public String toString() {
+        return "UserAddressVO{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", receiverName='" + receiverName + '\'' +
+                ", receiverPhone='" + receiverPhone + '\'' +
+                ", receiverMobile='" + receiverMobile + '\'' +
+                ", receiverProvince='" + receiverProvince + '\'' +
+                ", receiverCity='" + receiverCity + '\'' +
+                ", receiverDistrict='" + receiverDistrict + '\'' +
+                ", receiverAddress='" + receiverAddress + '\'' +
+                ", receiverZip='" + receiverZip + '\'' +
+                '}';
+    }
 }

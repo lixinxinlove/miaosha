@@ -11,6 +11,8 @@ public interface UserAddressService {
 
     Integer addUserAddress(UserAddressDO userAddressDO);
 
+    Integer updateAddress(UserAddressDO userAddressDO);
+
     List<UserAddressDO> getUserAddressList(Integer userId);
 
 }
