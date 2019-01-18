@@ -1,6 +1,7 @@
 package com.lixinxinlove.miaosha.controller;
 
 
+import com.github.pagehelper.PageInfo;
 import com.lixinxinlove.miaosha.controller.viewobject.UserAddressVO;
 import com.lixinxinlove.miaosha.dataobject.UserAddressDO;
 import com.lixinxinlove.miaosha.error.BusinessException;
@@ -48,6 +49,20 @@ public class UserAddressController extends BaseController {
             BeanUtils.copyProperties(userAddressDO, userAddressVO);
             list1.add(userAddressVO);
         }
+
+        if (list1 != null) {
+            return CommonReturnType.create(list1);
+        } else {
+            return CommonReturnType.create(null);
+        }
+    }
+
+
+    @RequestMapping(value = "/listpage", method = {RequestMethod.GET})
+    public CommonReturnType list(@RequestParam(name = "userId") Integer userId,
+                                 @RequestParam(name = "page") Integer page,
+                                 @RequestParam(name = "size") Integer size) throws BusinessException {
+        PageInfo<UserAddressDO> list1 = userAddressService.getUserAddressList(userId, page, size);
 
         if (list1 != null) {
             return CommonReturnType.create(list1);

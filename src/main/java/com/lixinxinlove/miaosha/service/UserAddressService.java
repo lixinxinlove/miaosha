@@ -1,5 +1,6 @@
 package com.lixinxinlove.miaosha.service;
 
+import com.github.pagehelper.PageInfo;
 import com.lixinxinlove.miaosha.dataobject.UserAddressDO;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface UserAddressService {
     Integer updateAddress(UserAddressDO userAddressDO);
 
     List<UserAddressDO> getUserAddressList(Integer userId);
+
+    PageInfo<UserAddressDO> getUserAddressList(Integer userId, Integer page, Integer size);
 
 }
